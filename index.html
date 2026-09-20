@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>obmc cafe index</title>
+    
+    <link rel="stylesheet" href="https://pyscript.net/releases/2026.7.3/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2026.7.3/core.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            border-radius: 0 !important;
+        }
+
+        body {
+            background-color: #230638;
+            background-image: url('https://preview.redd.it/transparent-brick-overlay-v0-54h2mjo7lwg51.png?width=640&crop=smart&auto=webp&s=fc4907997877fdab5e26327b5cf272456064a9a6');
+            background-repeat: repeat;
+            color: #1e293b;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            width: 100%;
+            background-color: #120320;
+            color: #ffffff;
+            padding: 20px 36px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: none;
+            outline: none;
+            box-shadow: none;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 24px;
+            color: #ffffff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .nav-links a {
+            color: #d8b4fe;
+            text-decoration: none;
+            padding: 8px 16px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .nav-links a.active, .nav-links a:hover {
+            color: #ffffff;
+            background-color: #3b0764;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 680px;
+            border: 4px solid #000000;
+            box-shadow: 10px 10px 0px #000000;
+        }
+
+        .banner {
+            background-color: #3b0764;
+            color: #ffffff;
+            text-align: center;
+            padding: 32px 20px;
+            border-bottom: 4px solid #000000;
+        }
+
+        .banner h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .banner p {
+            font-size: 15px;
+            color: #e9d5ff;
+        }
+
+        .content {
+            padding: 36px;
+        }
+
+        .menu-title {
+            color: #111827;
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            border: 2px solid #000000;
+            background-color: #faf5ff;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .menu-item:hover {
+            background-color: #f3e8ff;
+        }
+
+        .item-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .item-info input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #7e22ce;
+            cursor: pointer;
+        }
+
+        .item-price {
+            font-weight: 800;
+            color: #6b21a8;
+            font-size: 17px;
+        }
+
+        .btn-action {
+            width: 100%;
+            margin-top: 24px;
+            background-color: #7e22ce;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 16px;
+            border: 3px solid #000000;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px #000000;
+        }
+
+        .btn-action:hover {
+            background-color: #6b21a8;
+        }
+
+        .btn-action:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #000000;
+        }
+
+        #receipt-output {
+            margin-top: 28px;
+            background-color: #f8fafc;
+            border: 2px dashed #000000;
+            padding: 24px;
+        }
+
+        .placeholder-text {
+            text-align: center;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .receipt-title {
+            text-align: center;
+            font-weight: 800;
+            color: #3b0764;
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .receipt-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 15px;
+            color: #334155;
+            padding: 6px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .receipt-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 2px solid #000000;
+        }
+
+        .total-amount {
+            color: #7e22ce;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Obmc cafe</div>
+        <div class="nav-links">
+            <a href="index.html" class="active">Receipt Generator</a>
+            <a href="sku.html">SKU Generator</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="card">
+            
+            <div class="banner">
+                <h1>OBMC cafe</h1>
+                <p>Coffee Shop</p>
+            </div>
+
+            <div class="content">
+                <div class="menu-title">Select Items</div>
+                
+                <form class="menu-list" onsubmit="return false;">
+                    <label class="menu-item">
+                        <div class="item-info">
+                            <input type="checkbox" id="item1" value="99.00" data-name="Americano">
+                            <span>Espresso</span>
+                        </div>
+                        <span class="item-price">₱99</span>
+                    </label>
+
+                    <label class="menu-item">
+                        <div class="item-info">
+                            <input type="checkbox" id="item2" value="129.00" data-name="Spanish Latte">
+                            <span>Latte</span>
+                        </div>
+                        <span class="item-price">₱129</span>
+                    </label>
+
+                    <label class="menu-item">
+                        <div class="item-info">
+                            <input type="checkbox" id="item3" value="189.00" data-name="Cold Brew Malt">
+                            <span>Mocha</span>
+                        </div>
+                        <span class="item-price">₱189</span>
+                    </label>
+
+                    <label class="menu-item">
+                        <div class="item-info">
+                            <input type="checkbox" id="item4" value="159.00" data-name="Affogato">
+                            <span>Cortado</span>
+                        </div>
+                        <span class="item-price">₱159</span>
+                    </label>
+
+                    <label class="menu-item">
+                        <div class="item-info">
+                            <input type="checkbox" id="item5" value="129.00" data-name="Caramel Macchiato">
+                            <span>Caramel Macchiato</span>
+                        </div>
+                        <span class="item-price">₱129</span>
+                    </label>
+
+                    <button type="button" id="btn-order" class="btn-action">
+                        Create Order Receipt
+                    </button>
+                </form>
+
+                <div id="receipt-output">
+                    <p class="placeholder-text">Your order receipt will appear here.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="py" src="main.py"></script>
+</body>
+</html>
